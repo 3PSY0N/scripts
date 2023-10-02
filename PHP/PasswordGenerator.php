@@ -8,6 +8,9 @@ use JetBrains\PhpStorm\NoReturn;
 class PasswordGenerator
 {
     private const OPT_SHORT = "l:c:sm:n:h";
+    private const DEFAULT_LENGTH = 15;
+    private const DEFAULT_CASE = 3;
+
     private array|false $options;
 
     /**
@@ -33,8 +36,8 @@ class PasswordGenerator
         }
 
         // Get options values.
-        $length = intval($this->options['l'] ?? 15);
-        $case = intval($this->options['c'] ?? 3);
+        $length = intval($this->options['l'] ?? self::DEFAULT_LENGTH);
+        $case = intval($this->options['c'] ?? self::DEFAULT_CASE);
         $useSpecialChar = isset($this->options['s']);
         $customChars = $this->options['m'] ?? null;
 
@@ -70,14 +73,17 @@ class PasswordGenerator
      */
     private function displayHelp(): string
     {
+        $defaultLength = self::DEFAULT_LENGTH;
+        $defaultCase = self::DEFAULT_CASE;
+
         return <<<HELP
         
         \033[33m┌─────  Password Generator Help  ─────\e[0m
         \033[33m│\e[0m 
         \033[33m│\e[0m Usage ./PasswordGenerator.php [options...]
         \033[33m│\e[0m 
-        \033[33m│\e[0m -l <\033[32mint\e[0m>  Password Length \033[34m(default: 15)\e[0m
-        \033[33m│\e[0m -c <\033[32mint\e[0m>  Chars Case : \033[34m(default: 3)\e[0m
+        \033[33m│\e[0m -l <\033[32mint\e[0m>  Password Length \033[34m(default: {$defaultLength})\e[0m
+        \033[33m│\e[0m -c <\033[32mint\e[0m>  Chars Case : \033[34m(default: {$defaultCase})\e[0m
         \033[33m│\e[0m             - 1: Lower case
         \033[33m│\e[0m             - 2: Upper case
         \033[33m│\e[0m             - 3: Mixed case
@@ -90,8 +96,9 @@ class PasswordGenerator
         \033[33m│\e[0m
         \033[33m│\e[0m \033[37mNote: with manual chars list, use single quotes to escape special chars.
         \033[33m│\e[0m \033[37mNote: with manual chars list, -c and -s options are ignored.
+        \033[33m│\e[0m 
         \033[33m└─────\e[0m
-        
+
         HELP;
     }
 
