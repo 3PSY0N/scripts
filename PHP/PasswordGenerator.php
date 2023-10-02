@@ -3,8 +3,6 @@
 
 declare(strict_types=1);
 
-use JetBrains\PhpStorm\NoReturn;
-
 class PasswordGenerator
 {
     private const OPT_SHORT = "l:c:sm:n:h";
@@ -24,7 +22,6 @@ class PasswordGenerator
      * @throws Exception
      * @return void
      */
-    #[NoReturn]
     public function __construct()
     {
         $this->options = getopt(self::OPT_SHORT);
