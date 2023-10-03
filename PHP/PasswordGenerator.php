@@ -8,12 +8,7 @@ class PasswordGenerator
     private const OPT_SHORT = "l:c:sm:n:h";
     private const DEFAULT_LENGTH = 15;
     private const DEFAULT_CASE = 3;
-
     private array|false $options;
-
-    /**
-     * @throws Exception
-     */
 
     /**
      * Constructor for PasswordGenerator class.
