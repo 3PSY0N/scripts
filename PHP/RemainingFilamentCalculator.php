@@ -13,6 +13,12 @@ class RemainingFilamentCalculator
 
     private array|false $options;
 
+    /**
+     * Constructor for RemainingFilamentCalculator class.
+     * Initializes options and displays help if requested.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->options = getopt(self::OPT_SHORT);
@@ -23,8 +29,14 @@ class RemainingFilamentCalculator
         }
 
         echo $this->showCalculations();
+        exit(0);
     }
 
+    /**
+     * Parses command-line options and returns an array of input data.
+     *
+     * @return array
+     */
     private function inputData(): array
     {
         return [
@@ -36,6 +48,11 @@ class RemainingFilamentCalculator
         ];
     }
 
+    /**
+     * Displays help information for the RemainingFilamentCalculator.
+     *
+     * @return string|null
+     */
     private function displayHelp(): ?string
     {
         $filamentDiameter = self::FILAMENT_DIAMETER;
@@ -73,6 +90,11 @@ class RemainingFilamentCalculator
         HELP;
     }
 
+    /**
+     * Calculates and returns the length of remaining filament.
+     *
+     * @return float|int
+     */
     private function calculateFilamentLength(): float|int
     {
         $data = $this->inputData();
@@ -89,6 +111,11 @@ class RemainingFilamentCalculator
         return $filamentMass / ($filamentDensity * $crossSection);
     }
 
+    /**
+     * Generates and returns information about remaining filament and related data.
+     *
+     * @return string
+     */
     private function showCalculations(): string
     {
         $data = $this->inputData();
